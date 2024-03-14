@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Step</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="step.js"></script>
+  </head>
+  <body class="conteiner-all">
+    <!-- Creare una pagina html con all'interno dei tab che indicano gli step di registrazione dell'utente. 
+Ogni tab avrà un certo numero di campi di iinput e solo se tutti i campi saranno compilati, 
+sarà possibile passare al tab successivo. L'ultimo tab conterrà due bottoni: stampa e salva che al click mostrerà una modale 
+con il riepilogo di tutti i dati inseriti dall'utente. I dati saranno inoltre salvati in sessione e al click sul tasto stampa, 
+sarà aperta una nuova scheda del browser con tutte le info dell'utente -->
+
+    <div class="stepper">
+      <div id="anagrafica">
+        <div>Anagrafica</div>
+      </div>
+      <div id="datiUtente">
+        <div>Dati utente</div>
+      </div>
+      <div id="conferma">
+        <div>Conferma</div>
+      </div>
+    </div>
+    <div class="conteiner-form">
+      <div id="anagraficaForm">
+        <form>
+          <div class="div-label">
+            <label for="nome">Nome</label>
+            <input
+              type="text"
+              name="nome"
+              placeholder="Inserisci nome"
+              id="nome"
+              required
+            />
+          </div>
+          <div class="div-label">
+            <label for="cognome">Cognome</label>
+            <input
+              type="text"
+              name="cognome"
+              placeholder="Inserisci cognome"
+              id="cognome"
+              required
+            />
+          </div>
+          <button onclick="registraAnagrafica()" disabled class="btn">
+            <span>Registra Anagrafica</span>
+            <svg
+              width="34"
+              height="34"
+              viewBox="0 0 74 74"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle
+                cx="37"
+                cy="37"
+                r="35.5"
+                stroke="black"
+                stroke-width="3"
+              ></circle>
+              <path
+                d="M25 35.5C24.1716 35.5 23.5 36.1716 23.5 37C23.5 37.8284 24.1716 38.5 25 38.5V35.5ZM49.0607 38.0607C49.6464 37.4749 49.6464 36.5251 49.0607 35.9393L39.5147 26.3934C38.9289 25.8076 37.9792 25.8076 37.3934 26.3934C36.8076 26.9792 36.8076 27.9289 37.3934 28.5147L45.8787 37L37.3934 45.4853C36.8076 46.0711 36.8076 47.0208 37.3934 47.6066C37.9792 48.1924 38.9289 48.1924 39.5147 47.6066L49.0607 38.0607ZM25 38.5L48 38.5V35.5L25 35.5V38.5Z"
+                fill="black"
+              ></path>
+            </svg>
+          </button>
+        </form>
+      </div>
+      <div id="registrazioneForm">
+        <form>
+          <div class="div-label">
+            <label for="email">Email</label>
+            <input
+              type="text"
+              name="email"
+              id="email"
+              placeholder="Inserisci email"
+            />
+          </div>
+          <div class="div-label">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Inserisci password"
+            />
+          </div>
+          <button onclick="registraEmailPassword()" disabled class="btn">
+            <span>Registrati</span>
+            <svg
+              width="34"
+              height="34"
+              viewBox="0 0 74 74"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle
+                cx="37"
+                cy="37"
+                r="35.5"
+                stroke="black"
+                stroke-width="3"
+              ></circle>
+              <path
+                d="M25 35.5C24.1716 35.5 23.5 36.1716 23.5 37C23.5 37.8284 24.1716 38.5 25 38.5V35.5ZM49.0607 38.0607C49.6464 37.4749 49.6464 36.5251 49.0607 35.9393L39.5147 26.3934C38.9289 25.8076 37.9792 25.8076 37.3934 26.3934C36.8076 26.9792 36.8076 27.9289 37.3934 28.5147L45.8787 37L37.3934 45.4853C36.8076 46.0711 36.8076 47.0208 37.3934 47.6066C37.9792 48.1924 38.9289 48.1924 39.5147 47.6066L49.0607 38.0607ZM25 38.5L48 38.5V35.5L25 35.5V38.5Z"
+                fill="black"
+              ></path>
+            </svg>
+          </button>
+        </form>
+      </div>
+      <div id="stampaSalva">
+        <button class="btn-print" onclick="stampa()">
+          Stampa
+          <svg fill="currentColor" viewBox="0 0 24 24" class="icon">
+            <path
+              clip-rule="evenodd"
+              d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
+              fill-rule="evenodd"
+            ></path>
+          </svg>
+        </button>
+        <button class="btn-save" onclick="salva()">
+          Salva
+          <svg fill="currentColor" viewBox="0 0 24 24" class="icon">
+            <path
+              clip-rule="evenodd"
+              d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
+              fill-rule="evenodd"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div id="modale">
+      <div>
+        <h3 class="date">Riepilogo Dati</h3>
+      </div>
+      <div id="riepilogoUtente"></div>
+      <div>
+        <button class="btn-save" onclick="chiudi()">
+          Chiudi
+          <svg fill="currentColor" viewBox="0 0 24 24" class="icon">
+            <path
+              clip-rule="evenodd"
+              d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
+              fill-rule="evenodd"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
